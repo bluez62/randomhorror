@@ -527,6 +527,15 @@ transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 40.48623, 0, 0)
 [node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(0.25980762, 0.5, 0, -0.15, 0.8660254, 0, 0, 0, 2, 40.486, 1.0019379, 0)
 
+[node name="CSGBox3D10" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.512314, 1.2441559, 22.133223)
+operation = 2
+size = Vector3(2, 3, 2)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 50, 62.58423, -1.0897034, 47.49497)
+material = SubResource("StandardMaterial3D_5v1tr")
+
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 visible = false
 mesh = SubResource("ArrayMesh_5v1tr")
