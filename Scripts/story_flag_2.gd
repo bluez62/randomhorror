@@ -18,6 +18,11 @@ func _on_body_entered(body: Node3D) -> void:
 		Dialogue.text = "[You]\nWoah.. It's dark in here."
 		GlobalNode.StoryFlag = 2
 		start_typewriter_effect()
+		await get_tree().create_timer(3).timeout
+		Dialogue.text = "[You]\nI need to find a light switch."
+		start_typewriter_effect()
+		await get_tree().create_timer(3).timeout
+		Dialogue.visible = false
 
 func start_typewriter_effect():
 	# Reset visible characters to 0
