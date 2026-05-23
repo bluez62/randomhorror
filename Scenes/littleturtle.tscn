@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqm1jgcimimcf"]
+
+[ext_resource type="Script" uid="uid://dvbelu8pgvd2u" path="res://Scripts/littleturtle.gd" id="1_0xp62"]
+[ext_resource type="Texture2D" uid="uid://je2of371spqs" path="res://TURTLEPIX3.png" id="2_kwsjr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy488"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xp62"]
+size = Vector3(2.2, 2.2, 2.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwsjr"]
+size = Vector3(300, 5, 300)
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_0xp62")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.34144807, 0)
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("2_kwsjr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.3636948, 0)
+shape = SubResource("BoxShape3D_oy488")
+
+[node name="Jumpscare" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jumpscare"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20841682, 0)
+shape = SubResource("BoxShape3D_0xp62")
+
+[node name="Eyes" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5967883, 1.3593671)
+target_position = Vector3(0, 0, -100)
+collision_mask = 3
+debug_shape_thickness = 5
+
+[node name="Ray-Cast-Checker" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ray-Cast-Checker"]
+shape = SubResource("BoxShape3D_kwsjr")
+
+[connection signal="body_entered" from="Jumpscare" to="." method="_on_jumpscare_body_entered"]
+[connection signal="body_entered" from="Ray-Cast-Checker" to="." method="_on_ray_cast_checker_body_entered"]
+[connection signal="body_exited" from="Ray-Cast-Checker" to="." method="_on_ray_cast_checker_body_exited"]
