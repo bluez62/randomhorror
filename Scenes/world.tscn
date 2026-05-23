@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://cj5pyv325nmc3"]
+[gd_scene load_steps=59 format=4 uid="uid://cj5pyv325nmc3"]
 
 [ext_resource type="Script" uid="uid://bk7oxbyooeg5" path="res://Scripts/play_button.gd" id="1_5v1tr"]
 [ext_resource type="Script" uid="uid://bc76dysycmoqw" path="res://Scripts/settings_button.gd" id="2_0fj1v"]
@@ -127,6 +127,13 @@ font_names = PackedStringArray("Agency FB")
 
 [sub_resource type="LabelSettings" id="LabelSettings_t2t4p"]
 font = SubResource("SystemFont_hgpy0")
+font_size = 29
+
+[sub_resource type="SystemFont" id="SystemFont_c5t2i"]
+font_names = PackedStringArray("Agency FB")
+
+[sub_resource type="LabelSettings" id="LabelSettings_e0ngr"]
+font = SubResource("SystemFont_c5t2i")
 font_size = 29
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
@@ -444,6 +451,13 @@ offset_right = 804.0
 offset_bottom = 322.0
 text = "Window"
 label_settings = SubResource("LabelSettings_t2t4p")
+
+[node name="VersionLabel" type="Label" parent="CanvasLayer"]
+offset_top = 613.0
+offset_right = 115.0
+offset_bottom = 648.0
+text = "V0.0.1 ALPHA"
+label_settings = SubResource("LabelSettings_e0ngr")
 
 [node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.785743, 0.46693778, -7.8057305e-08)

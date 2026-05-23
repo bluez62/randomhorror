@@ -17,6 +17,7 @@ var began = false
 @onready var ShadowLabel: Label = $"../ShadowLabel"
 @onready var FullscreenSettings: OptionButton = $"../FullscreenSettings"
 @onready var FullscreenLabel: Label = $"../FullscreenLabel"
+@onready var VersionLabel: Label = $"../VersionLabel"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _ready() -> void:
 	BackButton.visible = false
 	FullscreenLabel.visible = false
 	FullscreenSettings.visible = false
+	VersionLabel.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +51,7 @@ func _on_button_up() -> void:
 	PlayButton.visible = false
 	SettingsButton.process_mode = Node.PROCESS_MODE_DISABLED
 	SettingsButton.visible = false
+	VersionLabel.visible = false
 	await get_tree().create_timer(2.0).timeout
 	Context.visible_characters += 2
 	loop()

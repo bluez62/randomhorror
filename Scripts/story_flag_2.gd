@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and GlobalNode.StoryFlag == 1:
 		Dialogue.visible = true
 		Dialogue.text = "[You]\nWoah.. It's dark in here."
 		GlobalNode.StoryFlag = 2
