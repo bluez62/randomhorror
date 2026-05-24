@@ -105,7 +105,7 @@ font_names = PackedStringArray("Bell MT")
 
 [sub_resource type="LabelSettings" id="LabelSettings_0fj1v"]
 font = SubResource("SystemFont_5v1tr")
-font_size = 32
+font_size = 64
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
@@ -358,17 +358,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -201.0
-offset_top = -198.0
-offset_right = 194.0
-offset_bottom = 249.0
+offset_left = -198.5
+offset_top = -234.0
+offset_right = 196.5
+offset_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Chapter 1
-
-
-
-
 
 
 
@@ -464,7 +460,7 @@ label_settings = SubResource("LabelSettings_t2t4p")
 offset_top = 613.0
 offset_right = 115.0
 offset_bottom = 648.0
-text = "V0.0.3 ALPHA"
+text = "V0.0.4 ALPHA"
 label_settings = SubResource("LabelSettings_e0ngr")
 
 [node name="ProdLabel" type="Label" parent="CanvasLayer"]
