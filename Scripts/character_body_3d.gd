@@ -15,6 +15,7 @@ const SENSITIVITY = 0.003
 @onready var SprintLabel: Label = $"../CanvasLayer/SprintLabel"
 @onready var DialogueLabel: Label = $"../CanvasLayer/DialogueLabel"
 @onready var FadeBox: ColorRect = $"../CanvasLayer/Fade"
+@onready var interaction_ray: RayCast3D = $Camera3D/RayCast3D
 
 func _ready() -> void:
 	pass
@@ -32,6 +33,13 @@ func _input(event: InputEvent) -> void:
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		# Check if the raycast is currently hitting something
+		if interaction_ray.is_colliding():
+			var hit_object = interaction_ray.get_collider()
+			# Check if the object we hit has the "interact" function
+			if hit_object.has_method("interact"):
+				hit_object.interact()
 	# Optional: Press Escape to free the mouse cursor
 	if event.is_action_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
