@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://cj5pyv325nmc3"]
+[gd_scene load_steps=69 format=4 uid="uid://cj5pyv325nmc3"]
 
 [ext_resource type="Script" uid="uid://bk7oxbyooeg5" path="res://Scripts/play_button.gd" id="1_5v1tr"]
 [ext_resource type="Script" uid="uid://bc76dysycmoqw" path="res://Scripts/settings_button.gd" id="2_0fj1v"]
@@ -17,10 +17,6 @@
 [ext_resource type="Script" uid="uid://b4001wg0dcp3d" path="res://Scripts/switch_1.gd" id="15_hgpy0"]
 [ext_resource type="PackedScene" uid="uid://c8c78f8ktqns2" path="res://Scenes/Switch.tscn" id="15_kn0ld"]
 [ext_resource type="Script" uid="uid://blttw3eqm4wxj" path="res://Scripts/story_flag_4.gd" id="17_t2t4p"]
-[ext_resource type="PackedScene" uid="uid://cgjn71cehrt5s" path="res://Cadeira_2.fbx" id="18_0pcbe"]
-[ext_resource type="PackedScene" uid="uid://dj2odsvv8qeeq" path="res://Scenes/RedKey.tscn" id="19_axeuq"]
-[ext_resource type="Script" uid="uid://buxa43fs0r2hu" path="res://Scripts/red_key_range.gd" id="19_yq1aw"]
-[ext_resource type="AudioStream" uid="uid://dr5ulatvhuxi4" path="res://dragon-studio-single-key-press-393908.mp3" id="21_pyn1s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.92830116, 0.81352746, 0.9043317, 1)
@@ -185,12 +181,6 @@ albedo_texture = SubResource("NoiseTexture2D_k7acu")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7acu"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axeuq"]
-albedo_color = Color(0.29996836, 0.5116055, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cojt"]
-albedo_color = Color(0.27337447, 0.490281, 1, 1)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_kn0ld"]
 _surfaces = [{
 "aabb": AABB(3.3878555, -7.187094, -25, 72.08374, 16.249222, 99.12294),
@@ -254,13 +244,6 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0pcbe"]
 size = Vector3(4.412964, 3.5041504, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_axeuq"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1cojt"]
-size = Vector3(1, 2.2423096, 2.074707)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_no8kt"]
 
 [node name="World" type="Node3D"]
 
@@ -640,23 +623,6 @@ size = Vector3(13, 10, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.81525, 2.506343, 72.382996)
 size = Vector3(20, 10, 1)
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 60.455357, -0.26831055, 0)
-height = 1.4633789
-sides = 64
-material = SubResource("StandardMaterial3D_axeuq")
-
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(9, 0, 0, 0, 1, 0, 0, 0, 9, 60.455357, -0.26831055, 0)
-operation = 2
-height = 1.4633789
-sides = 64
-material = SubResource("StandardMaterial3D_1cojt")
-
-[node name="CSGBox3D19" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 60.455357, 0.4347859, 4.6320596)
-operation = 2
-
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 mesh = SubResource("ArrayMesh_kn0ld")
 
@@ -745,38 +711,11 @@ shape = SubResource("ConcavePolygonShape3D_t2t4p")
 
 [node name="StoryFlag4" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.391426, 1.2266002, 20.662622)
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("17_t2t4p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StoryFlag4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24212646, -0.11682129, 0)
 shape = SubResource("BoxShape3D_0pcbe")
-
-[node name="Cadeira_2" parent="." instance=ExtResource("18_0pcbe")]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 57.022896, 0.3, 3.0004423e-07)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Cadeira_2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cadeira_2/StaticBody3D"]
-transform = Transform3D(-2, 0, 1.7484555e-07, 0, 2, 0, -1.7484555e-07, 0, -2, 0.037071228, -0.8647215, 6.033297e-07)
-shape = SubResource("BoxShape3D_axeuq")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Cadeira_2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6475754, 1.1281084, -0.0017088571)
-shape = SubResource("BoxShape3D_1cojt")
-
-[node name="RedKeyRange" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.04637, 0.54307944, 0)
-script = ExtResource("19_yq1aw")
-
-[node name="RedKey" parent="RedKeyRange" instance=ExtResource("19_axeuq")]
-
-[node name="RedKeyHitbox" type="CollisionShape3D" parent="RedKeyRange"]
-shape = SubResource("BoxShape3D_no8kt")
-
-[node name="KeyCollect" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("21_pyn1s")
 
 [connection signal="button_up" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/SettingsButton" to="CanvasLayer/SettingsButton" method="_on_button_up"]

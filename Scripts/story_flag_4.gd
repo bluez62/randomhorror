@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.name == "Player" and GlobalNode.StoryFlag == 3:
+		print("Yes")
 		GlobalNode.StoryFlag = 4
 		await get_tree().create_timer(1).timeout
 		Dialogue.text = "[You]\nUhm...\nAm I hallucinating..."
