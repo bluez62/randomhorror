@@ -449,7 +449,7 @@ label_settings = SubResource("LabelSettings_t2t4p")
 offset_top = 613.0
 offset_right = 115.0
 offset_bottom = 648.0
-text = "V0.0.2 ALPHA"
+text = "V0.0.3 ALPHA"
 label_settings = SubResource("LabelSettings_e0ngr")
 
 [node name="ProdLabel" type="Label" parent="CanvasLayer"]
