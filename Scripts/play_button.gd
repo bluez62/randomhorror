@@ -10,7 +10,8 @@ var began = false
 @onready var DialogueLabel: Label = $"../DialogueLabel"
 @onready var SprintLabel: Label = $"../SprintLabel"
 @onready var TitleScreenMusic: AudioStreamPlayer = $"../../TitleScreenMusic"
-@onready var Chapter1Button: TextureButton = $"../TextureButton"
+@onready var Chapter1Button: TextureButton = $"../PanelContainer/TextureButton"
+@onready var Chapter1Label: Label = $"../Chapter1Label"
 @onready var Context: Label = $"../Context"
 @onready var ShadowSettings: OptionButton = $"../ShadowSettings"
 @onready var BackButton: Button = $"../BackButton"
@@ -18,6 +19,7 @@ var began = false
 @onready var FullscreenSettings: OptionButton = $"../FullscreenSettings"
 @onready var FullscreenLabel: Label = $"../FullscreenLabel"
 @onready var VersionLabel: Label = $"../VersionLabel"
+@onready var ProdLabel: Label = $"../ProdLabel"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +32,21 @@ func _ready() -> void:
 	FullscreenLabel.visible = false
 	FullscreenSettings.visible = false
 	VersionLabel.visible = false
+	Chapter1Button.visible = false
+	Chapter1Label.visible = false
+	ProdLabel.modulate.a = 0.0
+	await get_tree().create_timer(2).timeout
+	var ProdTween = create_tween()
+	ProdTween.tween_property(ProdLabel, "modulate:a", 1.0, 3.0)
+	await ProdTween.finished
+	await get_tree().create_timer(1).timeout
+	var ProdTween2 = create_tween()
+	ProdTween2.tween_property(ProdLabel, "modulate:a", 0.0, 3.0)
+	await ProdTween2.finished
+	await get_tree().create_timer(1).timeout
+	ProdLabel.visible = false
+	Chapter1Label.visible = true
+	Chapter1Button.visible = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,7 +68,7 @@ func _on_button_up() -> void:
 	PlayButton.visible = false
 	SettingsButton.process_mode = Node.PROCESS_MODE_DISABLED
 	SettingsButton.visible = false
-	VersionLabel.visible = false
+	VersionLabel.visible = false 
 	await get_tree().create_timer(2.0).timeout
 	Context.visible_characters += 2
 	loop()
