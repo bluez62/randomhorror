@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://b68gpnbltih2u" path="res://Scripts/fullscreen_settings.gd" id="7_c5t2i"]
 [ext_resource type="PackedScene" uid="uid://vlrjhueoo61m" path="res://Scenes/TreeRing.tscn" id="7_o06y3"]
 [ext_resource type="Script" uid="uid://dn8u5t62vumbj" path="res://Scripts/story_flag_2.gd" id="8_k7acu"]
+[ext_resource type="PackedScene" uid="uid://daab8prx5bufy" path="res://Scenes/lightbulb.tscn" id="14_e0ngr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.92830116, 0.81352746, 0.9043317, 1)
@@ -144,13 +145,6 @@ font = SubResource("SystemFont_t2t4p")
 font_size = 64
 shadow_size = 10
 shadow_color = Color(0, 0, 0.39215687, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5t2i"]
-bg_color = Color(1, 0, 0, 0)
-border_color = Color(1, 0, 0, 1)
-corner_detail = 17
-shadow_color = Color(1, 1, 1, 1)
-shadow_size = 50
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -468,25 +462,20 @@ text = "Bluez Productions"
 label_settings = SubResource("LabelSettings_0pcbe")
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-clip_children = 1
-anchors_preset = 7
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -76.0
-offset_top = -478.0
-offset_right = 200.0
-offset_bottom = 97.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -148.0
+offset_right = 206.0
+offset_bottom = 427.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-theme_override_styles/panel = SubResource("StyleBoxFlat_c5t2i")
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/PanelContainer" groups=["tween_targets"]]
-z_index = 3
-layout_mode = 2
 texture_normal = ExtResource("3_5v1tr")
 script = ExtResource("4_0fj1v")
 
@@ -573,13 +562,41 @@ transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 40.48623, 0, 0)
 transform = Transform3D(0.25980762, 0.5, 0, -0.15, 0.8660254, 0, 0, 0, 2, 40.486, 1.0019379, 0)
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.512314, 1.2441559, 22.133223)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.512314, 0.94152856, 22.133223)
 operation = 2
 size = Vector3(2, 3, 2)
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 50, 62.58423, -1.0897034, 47.49497)
 material = SubResource("StandardMaterial3D_5v1tr")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.819637, 3.0418215, 46.99113)
+size = Vector3(5, 8, 50)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.971596, 3.1951082, 47.21439)
+size = Vector3(5, 8, 50)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.135048, 6.8878794, 49.122936)
+size = Vector3(20, 1, 50)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.05424, 4.0621285, 32.295265)
+size = Vector3(13, 10, 1)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.722404, 4.0621285, 41.242214)
+size = Vector3(13, 10, 1)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.41814, 4.0621285, 49.166264)
+size = Vector3(13, 10, 1)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.81525, 2.506343, 72.382996)
+size = Vector3(20, 10, 1)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 visible = false
@@ -642,10 +659,13 @@ script = ExtResource("8_k7acu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666378, 1.5674438, 0.09338379)
 shape = SubResource("BoxShape3D_ikia7")
 
+[node name="Lightbulb" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.288895, 3.9511716, 34.90551)
+
 [connection signal="button_up" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/SettingsButton" to="CanvasLayer/SettingsButton" method="_on_button_up"]
 [connection signal="item_selected" from="CanvasLayer/ShadowSettings" to="CanvasLayer/ShadowSettings" method="_on_item_selected"]
 [connection signal="button_up" from="CanvasLayer/BackButton" to="CanvasLayer/BackButton" method="_on_button_up"]
 [connection signal="item_selected" from="CanvasLayer/FullscreenSettings" to="CanvasLayer/FullscreenSettings" method="_on_item_selected"]
-[connection signal="button_up" from="CanvasLayer/PanelContainer/TextureButton" to="CanvasLayer/PanelContainer/TextureButton" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/TextureButton" to="CanvasLayer/TextureButton" method="_on_button_up"]
 [connection signal="body_entered" from="StoryFlag2" to="StoryFlag2" method="_on_body_entered"]

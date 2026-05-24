@@ -1,7 +1,7 @@
 extends TextureButton
 
 @onready var FadeBox: ColorRect = $"../Fade"
-@onready var Chapter1Label: Label = $"../PanelContainer/Chapter1Label"
+@onready var Chapter1Label: Label = $"../Chapter1Label"
 @onready var TitleScreenMusic: AudioStreamPlayer = $"../../TitleScreenMusic"
 @onready var VersionLabel: Label = $"../VersionLabel"
 
