@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://cj5pyv325nmc3"]
+[gd_scene load_steps=82 format=4 uid="uid://cj5pyv325nmc3"]
 
 [ext_resource type="Script" uid="uid://bk7oxbyooeg5" path="res://Scripts/play_button.gd" id="1_5v1tr"]
 [ext_resource type="Script" uid="uid://bc76dysycmoqw" path="res://Scripts/settings_button.gd" id="2_0fj1v"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://dj2odsvv8qeeq" path="res://Scenes/RedKey.tscn" id="19_axeuq"]
 [ext_resource type="Script" uid="uid://buxa43fs0r2hu" path="res://Scripts/red_key_range.gd" id="19_yq1aw"]
 [ext_resource type="AudioStream" uid="uid://dr5ulatvhuxi4" path="res://dragon-studio-single-key-press-393908.mp3" id="21_pyn1s"]
+[ext_resource type="Script" uid="uid://w7qwjkinww82" path="res://Scripts/ore_room_door.gd" id="22_no8kt"]
+[ext_resource type="PackedScene" uid="uid://22v827omm8a" path="res://Scenes/Lock.tscn" id="23_xbk3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.92830116, 0.81352746, 0.9043317, 1)
@@ -258,6 +260,15 @@ size = Vector3(4.412964, 3.5041504, 1)
 size = Vector3(1, 2.2423096, 2.074707)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_no8kt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4fjy"]
+albedo_color = Color(0.63888407, 2.0214916e-06, 4.813075e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pt3ps"]
+material = SubResource("StandardMaterial3D_i4fjy")
+size = Vector3(1, 4, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hmc15"]
 
 [node name="World" type="Node3D"]
 
@@ -653,6 +664,15 @@ material = SubResource("StandardMaterial3D_1cojt")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 1, 60.455357, 0.4347859, 4.6320596)
 operation = 2
 
+[node name="CSGBox3D20" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.585495, 2.746056, 0)
+size = Vector3(1, 8, 50)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.58026, 1.4185096, 0)
+operation = 2
+size = Vector3(5, 4, 3)
+
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 mesh = SubResource("ArrayMesh_kn0ld")
 
@@ -773,6 +793,44 @@ shape = SubResource("BoxShape3D_no8kt")
 
 [node name="KeyCollect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_pyn1s")
+
+[node name="Lightbulb2" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.402996, 3.0885477, 0)
+
+[node name="Lightbulb3" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.637012, 3.0282788, 0)
+
+[node name="Lightbulb4" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.820429, 3.135435, 11.272533)
+
+[node name="Lightbulb5" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.071278, 3.681655, 11.273)
+
+[node name="Lightbulb6" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.5916, 4.307494, 11.273)
+
+[node name="Lightbulb7" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.849403, 3.8630524, 0)
+
+[node name="Lightbulb8" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.300697, 3.4604912, -12.799305)
+
+[node name="Lightbulb9" parent="." instance=ExtResource("14_e0ngr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.398407, 2.9721346, -16.191128)
+
+[node name="RedDoor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.55941, 1.4265922, 0)
+mesh = SubResource("BoxMesh_pt3ps")
+
+[node name="OreRoomDoor" type="Area3D" parent="RedDoor"]
+script = ExtResource("22_no8kt")
+
+[node name="Lock" parent="RedDoor/OreRoomDoor" instance=ExtResource("23_xbk3s")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.46178436, -0.586872, -0.6998257)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RedDoor/OreRoomDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35166168, -0.5633582, -0.6274638)
+shape = SubResource("BoxShape3D_hmc15")
 
 [connection signal="button_up" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/SettingsButton" to="CanvasLayer/SettingsButton" method="_on_button_up"]
