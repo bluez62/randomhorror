@@ -42,10 +42,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				hit_object.interact()
 	# Optional: Press Escape to free the mouse cursor
 	if event.is_action_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
+		if GlobalNode.intextinput:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			GlobalNode.intextinput = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
