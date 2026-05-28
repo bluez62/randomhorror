@@ -4,6 +4,7 @@ extends TextureButton
 @onready var Chapter1Label: Label = $"../Chapter1Label"
 @onready var TitleScreenMusic: AudioStreamPlayer = $"../../TitleScreenMusic"
 @onready var VersionLabel: Label = $"../VersionLabel"
+@onready var PaperLabel: Label = $"../PaperLabel"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +19,8 @@ var FadeTween: Tween
 
 func _on_button_up() -> void:
 	GlobalNode.Chapter = 1
+	PaperLabel.visible = true
+	PaperLabel.modulate.a = 0
 	visible = false
 	Chapter1Label.visible = false
 	VersionLabel.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://cj5pyv325nmc3"]
+[gd_scene load_steps=93 format=4 uid="uid://cj5pyv325nmc3"]
 
 [ext_resource type="Script" uid="uid://bk7oxbyooeg5" path="res://Scripts/play_button.gd" id="1_5v1tr"]
 [ext_resource type="Script" uid="uid://bc76dysycmoqw" path="res://Scripts/settings_button.gd" id="2_0fj1v"]
@@ -24,6 +24,8 @@
 [ext_resource type="AudioStream" uid="uid://dr5ulatvhuxi4" path="res://dragon-studio-single-key-press-393908.mp3" id="21_pyn1s"]
 [ext_resource type="Script" uid="uid://w7qwjkinww82" path="res://Scripts/ore_room_door.gd" id="22_no8kt"]
 [ext_resource type="PackedScene" uid="uid://22v827omm8a" path="res://Scenes/Lock.tscn" id="23_xbk3s"]
+[ext_resource type="PackedScene" uid="uid://baog2tldutj52" path="res://Scenes/Paper.tscn" id="25_i4fjy"]
+[ext_resource type="Script" uid="uid://doiyafcjqppb8" path="res://Scripts/paper_area.gd" id="25_pt3ps"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.92830116, 0.81352746, 0.9043317, 1)
@@ -67,7 +69,7 @@ font_names = PackedStringArray("Arial")
 [sub_resource type="LabelSettings" id="LabelSettings_036b0"]
 font = SubResource("SystemFont_aqk2v")
 font_size = 32
-font_color = Color(0, 0.6627451, 0, 1)
+font_color = Color(0, 0.5882353, 0, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 
@@ -155,6 +157,19 @@ font = SubResource("SystemFont_t2t4p")
 font_size = 64
 shadow_size = 10
 shadow_color = Color(0, 0, 0.39215687, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt3ps"]
+bg_color = Color(0, 0, 0, 0.43529412)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_hmc15"]
+font = SubResource("SystemFont_aqk2v")
+font_size = 32
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f3sb7"]
 
@@ -323,6 +338,8 @@ material = SubResource("StandardMaterial3D_i4fjy")
 size = Vector3(1, 4, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hmc15"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dt0r1"]
 
 [node name="World" type="Node3D"]
 
@@ -595,6 +612,32 @@ grow_vertical = 2
 placeholder_text = "Code"
 max_length = 4
 
+[node name="PaperLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pt3ps")
+text = "
+Hey! Welcome to your first day as the new nightguard,
+I'm the previous one. Don't worry too much if you start to hear noises
+or if some stuff start to move.. It's nothing to worry about.
+Anyways, here is what you need to do:
+1. Turn the power on.
+2. Visit the Ore Exhibit and make sure nothing is missing.
+3. Take the elevator to the next floor and check everything.
+4. Do that for every floor.
+5. Check on the basement, but stay in the shelter.
+6. If anything is wrong, call the police instantly. But don't let it
+get on the news.
+7. If anything found you, stay calm and quickly make your way to an
+exit."
+label_settings = SubResource("LabelSettings_hmc15")
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.785743, 0.46693778, -7.8057305e-08)
 collision_layer = 2
@@ -725,7 +768,7 @@ height = 1.4633789
 sides = 64
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(9, 0, 0, 0, 1, 0, 0, 0, 9, 60.455357, -0.26831055, 0)
+transform = Transform3D(9, 0, 0, 0, 1, 0, 0, 0, 9, 60.455357, 0.16226959, 0)
 operation = 2
 height = 1.4633789
 sides = 64
@@ -865,7 +908,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24212646, -0.11682129, 0)
 shape = SubResource("BoxShape3D_0pcbe")
 
 [node name="Cadeira_2" parent="." instance=ExtResource("18_0pcbe")]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 57.022896, 0.3, 3.0004423e-07)
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 57.022896, 0.40219682, 3.0004423e-07)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cadeira_2"]
 
@@ -878,7 +921,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6475754, 1.1281084, -0.001
 shape = SubResource("BoxShape3D_1cojt")
 
 [node name="RedKeyRange" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.04637, 0.54307944, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.04637, 0.67589796, 0)
 script = ExtResource("19_yq1aw")
 
 [node name="RedKey" parent="RedKeyRange" instance=ExtResource("19_axeuq")]
@@ -926,6 +969,16 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RedDoor/OreRoomDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35166168, -0.5633582, -0.6274638)
 shape = SubResource("BoxShape3D_hmc15")
+
+[node name="PaperArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.242165, 0.061746478, 0)
+script = ExtResource("25_pt3ps")
+
+[node name="Sprite3D" parent="PaperArea" instance=ExtResource("25_i4fjy")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PaperArea"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_dt0r1")
 
 [connection signal="button_up" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/SettingsButton" to="CanvasLayer/SettingsButton" method="_on_button_up"]

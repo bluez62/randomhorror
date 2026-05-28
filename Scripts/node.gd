@@ -8,6 +8,7 @@ var PowerOn = false
 var switch1 = false
 var HasRedKey = false
 var intextinput = false
+var paperopen = false
 
 #Dev Log 2. Menu Test.
 #I don't plan for the enemy to be there in the full game, He is just there currently as a test.

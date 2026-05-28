@@ -16,6 +16,7 @@ const SENSITIVITY = 0.003
 @onready var DialogueLabel: Label = $"../CanvasLayer/DialogueLabel"
 @onready var FadeBox: ColorRect = $"../CanvasLayer/Fade"
 @onready var interaction_ray: RayCast3D = $Camera3D/RayCast3D
+@onready var PaperLabel: Label = $"../CanvasLayer/PaperLabel"
 
 func _ready() -> void:
 	pass
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if GlobalNode.canMove == 1:
+		if GlobalNode.canMove:
 			# Rotate the player horizontally (left/right)
 			rotate_y(-event.relative.x * SENSITIVITY)
 			
@@ -42,9 +43,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				hit_object.interact()
 	# Optional: Press Escape to free the mouse cursor
 	if event.is_action_pressed("ui_cancel"):
-		if GlobalNode.intextinput:
+		if GlobalNode.paperopen:
+			var PaperTween = create_tween()
+			PaperTween.tween_property(PaperLabel, "modulate:a", 0.0, 1)
+			await PaperTween.finished
+			GlobalNode.canMove = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			GlobalNode.intextinput = false
+			GlobalNode.paperopen = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -53,7 +58,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		if GlobalNode.canMove == 1:
+		if GlobalNode.canMove:
 			velocity.y = JUMP_VELOCITY
 
 	# Determine current speed based on whether the sprint key is held down
@@ -75,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and GlobalNode.canMove == 1:
+	if direction and GlobalNode.canMove:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 	else:
