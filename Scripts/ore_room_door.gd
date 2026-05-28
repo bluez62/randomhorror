@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var RedDoor: MeshInstance3D = $"../RedDoor" 
+@onready var RedDoor = get_parent()
 @onready var KeyCollect: AudioStreamPlayer = $"../../KeyCollect"
 @onready var Dialogue: Label = $"../../CanvasLayer/DialogueLabel"
 
