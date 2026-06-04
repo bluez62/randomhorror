@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
 # Movement speeds
-const WALK_SPEED = 5.0
+var WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
 var sprint = 200
 const MAX_SPRINT = 200
+var sprintDebug = false
 
 # Camera sensitivity
 const SENSITIVITY = 0.003
@@ -52,6 +53,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			GlobalNode.paperopen = false
 
 func _physics_process(delta: float) -> void:
+	if sprintDebug:
+		WALK_SPEED = 20.0
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -64,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	# Determine current speed based on whether the sprint key is held down
 	# (You'll want to map "sprint" to Shift in your Input Map, or change this string)
 	var current_speed = WALK_SPEED
-	if Input.is_action_pressed("ui_sprint") and GlobalNode.canMove == 1:
+	if Input.is_action_pressed("ui_sprint") and GlobalNode.canMove:
 		if sprint > 0:
 			current_speed = SPRINT_SPEED
 			sprint -= 0.5
