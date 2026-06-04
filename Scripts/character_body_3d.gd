@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-# Movement speeds
+#Variables
 var WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
@@ -8,10 +8,9 @@ var sprint = 200
 const MAX_SPRINT = 200
 var sprintDebug = false
 
-# Camera sensitivity
+#Camera sensitivity
 const SENSITIVITY = 0.003
 
-# Node reference (Make sure you have a Camera3D as a child of your player)
 @onready var camera: Camera3D = $Camera3D
 @onready var SprintLabel: Label = $"../CanvasLayer/SprintLabel"
 @onready var DialogueLabel: Label = $"../CanvasLayer/DialogueLabel"
@@ -21,28 +20,26 @@ const SENSITIVITY = 0.003
 
 func _ready() -> void:
 	pass
-	# Captures the mouse cursor and hides it when the game starts
+	#UNUSED CODE BELOW
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+#Mouse movements
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if GlobalNode.canMove:
-			# Rotate the player horizontally (left/right)
 			rotate_y(-event.relative.x * SENSITIVITY)
-			
-			# Rotate the camera vertically (up/down) and clamp it so you can't flip upside down
 			camera.rotate_x(-event.relative.y * SENSITIVITY)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
+#Interact Code
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		# Check if the raycast is currently hitting something
 		if interaction_ray.is_colliding():
 			var hit_object = interaction_ray.get_collider()
-			# Check if the object we hit has the "interact" function
 			if hit_object.has_method("interact"):
 				hit_object.interact()
-	# Optional: Press Escape to free the mouse cursor
+
+	#Code to exit the note item.
 	if event.is_action_pressed("ui_cancel"):
 		if GlobalNode.paperopen:
 			var PaperTween = create_tween()
@@ -52,20 +49,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			GlobalNode.paperopen = false
 
+#Movement and stuff
 func _physics_process(delta: float) -> void:
+	#Debug Code (does not work and i'm not sure how to fix)
 	if sprintDebug:
 		WALK_SPEED = 20.0
-	# Add the gravity.
+	#Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
+	#Jump
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		if GlobalNode.canMove:
 			velocity.y = JUMP_VELOCITY
 
-	# Determine current speed based on whether the sprint key is held down
-	# (You'll want to map "sprint" to Shift in your Input Map, or change this string)
+	#Sprint
 	var current_speed = WALK_SPEED
 	if Input.is_action_pressed("ui_sprint") and GlobalNode.canMove:
 		if sprint > 0:
@@ -80,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		if sprint >= 200:
 			sprint = 200
 
-	# Get the input direction and handle the movement/deceleration.
+	#Movement
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and GlobalNode.canMove:

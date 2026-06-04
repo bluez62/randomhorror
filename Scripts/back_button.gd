@@ -8,16 +8,13 @@ extends Button
 @onready var FullscreenSettings: OptionButton = $"../FullscreenSettings"
 @onready var FullscreenLabel: Label = $"../FullscreenLabel"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
+#Change menu
 func _on_button_up() -> void:
 	PlayButton.visible = true
 	SettingsButton.visible = true
