@@ -19,7 +19,7 @@ script = ExtResource("1_0xp62")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.34144807, 0)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.6728856, 0)
 billboard = 2
 shaded = true
 texture_filter = 0

@@ -38,6 +38,7 @@ func _physics_process(_delta: float) -> void:
 		if Eyes.is_colliding():
 			var collider = Eyes.get_collider()
 			if collider == player2 and GlobalNode.follow == 1:
+				print_debug("SAW!")
 				nav_agent.target_position = player_node.global_position
 
 			

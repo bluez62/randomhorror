@@ -5,13 +5,13 @@ extends Area3D
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
-		TheLittleTurtle.global_position.x = 107.7
-		TheLittleTurtle.global_position.y = -5.774
+		TheLittleTurtle.global_position.x = 106.6
+		TheLittleTurtle.global_position.y = -6.444
 		TheLittleTurtle.global_position.z = 0.0
 		TheLittleTurtle.visible = true
 		GlobalNode.follow = 1
 		Dialogue.visible = true
-		Dialogue.text = "Wh.. What!?"
+		Dialogue.text = "[You]\nWh.. What!?"
 		start_typewriter_effect()
 		await get_tree().create_timer(1.5).timeout
 		Dialogue.visible = false
