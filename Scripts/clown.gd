@@ -8,9 +8,13 @@ extends CharacterBody3D
 @onready var Eyes: RayCast3D = $Eyes
 @onready var Player: CharacterBody3D = $"../Player"
 @export var Jumpscare: AudioStreamPlayer
+@onready var Footsteps: AudioStreamPlayer3D = $Footsteps
 
 #error debug stuff
 func _ready() -> void:
+	Footsteps.play()
+	await get_tree().create_timer(7.27).timeout
+	Footsteps.stop()
 	if player_node == null:
 		print("Player Missing! (if i somehow changed the player node in inspector to nothing then thats why)")
 	else:

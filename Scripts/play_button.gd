@@ -100,7 +100,6 @@ func loop():
 			Context.visible = false
 			FadeBox.modulate.a = 0.0
 			GlobalNode.canMove = 1
-			GlobalNode.follow = 1
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			loop()

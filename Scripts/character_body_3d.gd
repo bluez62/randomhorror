@@ -65,8 +65,9 @@ func _physics_process(delta: float) -> void:
 
 	#Sprint
 	var current_speed = WALK_SPEED
-	if Input.is_action_pressed("ui_sprint") and GlobalNode.canMove:
+	if Input.is_action_pressed("ui_sprint") and velocity.length() > 0.1 and GlobalNode.canMove:
 		if sprint > 0:
+			get_tree().call_group("monsters", "hear_noise", global_position, 25.0)
 			current_speed = SPRINT_SPEED
 			sprint -= 0.5
 			SprintLabel.text = "Sprint: %d" % sprint
