@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-get_tree().change_scene_to_file("res://Scenes/Chapter6.tscn")
+#---get_tree().change_scene_to_file("res://Scenes/Chapter6.tscn")
 
 #Variables
 var WALK_SPEED = 5.0
