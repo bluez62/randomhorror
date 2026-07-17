@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://d3y73kk8b6gsp"]
+
+[ext_resource type="Script" uid="uid://ces7ss3a2ets" path="res://Scripts/character_body_3d.gd" id="1_xk5ex"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1voip"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_cj8pi"]
+sky_material = SubResource("ProceduralSkyMaterial_1voip")
+
+[sub_resource type="Environment" id="Environment_mnlei"]
+background_mode = 2
+sky = SubResource("Sky_cj8pi")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vmgxc"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vgneo"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pyi7f"]
+noise = SubResource("FastNoiseLite_vgneo")
+color_ramp = SubResource("Gradient_vmgxc")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_d7x6l"]
+_shader_parameters = {
+&"bias_distance": null,
+&"blend_sharpness": null,
+&"depth_blur": null,
+&"enable_macro_variation": null,
+&"enable_projection": null,
+&"flat_terrain_normals": null,
+&"macro_variation1": null,
+&"macro_variation2": null,
+&"macro_variation_slope": null,
+&"mipmap_bias": null,
+&"noise1_angle": null,
+&"noise1_offset": null,
+&"noise1_scale": null,
+&"noise2_scale": null,
+&"noise_texture": SubResource("NoiseTexture2D_pyi7f"),
+&"projection_threshold": null
+}
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejpl4"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_af8bb"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_ejpl4")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_nw3ml"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_af8bb")])
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pwf8s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f37ji"]
+
+[node name="Chapter6" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mnlei")
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+material = SubResource("Terrain3DMaterial_d7x6l")
+assets = SubResource("Terrain3DAssets_nw3ml")
+show_checkered = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="Player" type="CharacterBody3D" parent="Terrain3D" groups=["player"]]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.785743, 10.669484, -7.8057305e-08)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xk5ex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain3D/Player"]
+shape = SubResource("CapsuleShape3D_pwf8s")
+
+[node name="Camera3D" type="Camera3D" parent="Terrain3D/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65967226, 0)
+far = 150.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Terrain3D/Player/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collide_with_areas = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain3D/Player"]
+mesh = SubResource("CapsuleMesh_f37ji")
